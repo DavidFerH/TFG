@@ -5,20 +5,30 @@ const Block = require('../../services/blockchain/Block');
 
 const blockchain = new Blockchain();
 
-// Endpoint para añadir un bloque
+if (blockchain) console.log("Inicializada la Blockchain correctamente");
+
+/*
+    Input: req.body (JSON)
+    Output: res (JSON)
+    Description: Endpoint para añadir un nuevo bloque a la cadena
+*/
 router.post('/addBlock', async (req, res) => {
     try {
         const data = req.body;
         const newBlock = new Block(data);
 
         await blockchain.addBlock(newBlock);
-        res.status(200).send({ message: "ok" })
+        res.status(200).send({ message: "ok", block: newBlock })
     } catch (err) {
         res.status(500).send({ message: err.message })
     }
 });
 
-// Endpoint para obtener todos los bloque de la blockchain
+/*
+    Input: none
+    Output: res (JSON)
+    Description: Endpoint para obtener todos los bloque de la blockchain
+*/
 router.get('/getBlocks', (req, res) => {
     try {
         res.json(blockchain);
@@ -27,7 +37,11 @@ router.get('/getBlocks', (req, res) => {
     }
 });
 
-// Endpoint para obtener un bloque a través de su hash
+/*
+    Input: String
+    Output: res (JSON)
+    Description: Endpoint para obtener un bloque a través de su hash
+*/
 router.get('/getBlock', (req, res) => {
     try {
         const hash = req.query.hash;

@@ -3,6 +3,11 @@ const SHA256 = require('crypto-js/sha256');
 
 // Clase Block
 class Block {
+    /*
+        Input: none
+        Output: none
+        Description: Constructor de la clase Block
+    */
     constructor(payload) {
         this.index = 0;
         this.timestamp = new Date();

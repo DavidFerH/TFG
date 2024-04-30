@@ -2,6 +2,11 @@ const Block = require('./Block')
 
 // Clase Blockchain
 class Blockchain {
+    /*
+        Input: none
+        Output: none
+        Description: Constructor de la clase Blockchain
+    */
     constructor() {
         this.blockchain = [this.genesisBlock()];
     };

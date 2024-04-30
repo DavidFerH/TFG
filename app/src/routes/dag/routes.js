@@ -4,39 +4,48 @@ const Graph = require('../../services/dag/Graph');
 
 const graph = new Graph();
 
-router.post('/vertex', (req, res) => {
-    const { data, info } = req.body;
-    const vertex = graph.addVertex(data, info);
-    res.json({ hash: vertex });
-});
+if (graph) console.log("Inicializado el DAG correctamente");
 
+/*
+    Input: req.body (JSON)
+    Output: res (JSON)
+    Description: Endpoint para añadir una nueva transacción al grafo
+*/
 router.post('/create', (req, res) => {
     try {
         const data = req.body;
 
         const newVertexHash = graph.addVertex(data);
 
-        // Respuesta exitosa
         res.json({ success: true, message: 'Vértice agregado correctamente', hash: newVertexHash });
-    } catch (error) {
-        // Manejar errores
-        res.status(500).json({ success: false, message: error.message });
+    } catch (err) {
+        res.status(500).send({ message: err.message })
     }
 });
 
+/*
+    Input: none
+    Output: res (JSON)
+    Description: Endpoint para obtener el grafo
+*/
 router.get('/getGraph', (req, res) => {
     try {
         res.json({ success: true, vertices: graph.vertices });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    } catch (err) {
+        res.status(500).send({ message: err.message })
     }
 });
 
+/*
+    Input: none
+    Output: res (JSON)
+    Description: Endpoint para obtener el grafo en formato ASCII
+*/
 router.get('/printGraph', (req, res) => {
     try {
         res.json({ success: true, graph: graph.printGraph(graph) });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    } catch (err) {
+        res.status(500).send({ message: err.message })
     }
 });
 

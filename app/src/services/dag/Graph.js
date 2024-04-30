@@ -10,15 +10,13 @@ class Graph {
     /*
         Input: none
         Output: none
-        Description: Crea 4 nodos génesis
+        Description: Crea 4 transacciones génesis
     */
     async createGenesisNodes() {
         for (let i = 0; i < 4; i++) {
             const data = { transaction: `Génesis ${i + 1}` };
             const hash = await this.createHash(data);
             this.vertices[hash] = { info: data, edges: [] };
-
-            console.log("Hash : " + hash + " Data: " + JSON.stringify(data));
         }
     }
 
