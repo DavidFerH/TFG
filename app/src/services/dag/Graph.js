@@ -35,15 +35,17 @@ class Graph {
     }
 
     /*
-        Input: data (Object), info (Object)
+        Input: data (Object)
         Output: hash (String)
         Description: Agrega un vértice al grafo y retorna su hash único.
     */
-    async addVertex(data, info) {
+    async addVertex(data) {
+        console.log("Data:" + JSON.stringify(data));
+
         const hash = await this.createHash(data);
 
         if (!this.vertices[hash]) {
-            this.vertices[hash] = { info: info, edges: [] };
+            this.vertices[hash] = { info: data.info, edges: [] };
         }
 
         // Agregar automáticamente aristas para crear un DAG
